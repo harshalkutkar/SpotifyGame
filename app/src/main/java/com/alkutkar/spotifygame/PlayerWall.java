@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
 
+import com.spotify.sdk.android.Spotify;
+import com.spotify.sdk.android.playback.Player;
+
 import java.util.ArrayList;
 
 
@@ -14,7 +17,7 @@ public class PlayerWall extends Activity {
 
     ArrayList<Item> gridArray = new ArrayList<Item>();
 
-
+    private Player mPlayer;
     CustomGridViewAdapter customGridAdapter;
     GridView gridView;
     //blah blah
@@ -33,9 +36,13 @@ public class PlayerWall extends Activity {
         customGridAdapter = new CustomGridViewAdapter(this, R.layout.row_grid, gridArray);
         gridView.setAdapter(customGridAdapter);
 
-
+        this.populateSongList(savedInstanceState.getString("token"));
     }
 
+    private void populateSongList(String accessToken) {
+            Spotify spotify = new Spotify(accessToken);
+        System.out.println("Hello");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
